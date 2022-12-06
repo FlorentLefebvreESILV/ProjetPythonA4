@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8" />
+    <title>My test page</title>
+  </head>
+  <body>
+    <p>This is our API</p>
+    
+    <p style="text-align: left;">&nbsp;</p>
+    <label for="model-select">Generate a prediction:</label>
+    <p style="text-align: left;">&nbsp;</p>
+    
+    <form>
+        <div>
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required minlength="4" maxlength="8" size="10">
+        </div>
+        <div>
+            <label for="balloons">frame number (par 10) :</label>
+            <input id="balloons" type="number" name="balloons" step="10" min="0" max="100" required>
+            <span class="validity"></span>
+        </div>
+        <div>
+            <input type="submit">
+        </div>
+    </form>
+
+    <form action="your-prediction" method="post">
+        <label for="your_name">title: </label>
+        <input id="your_name" type="text" name="your_name" value="{{ current_name }}">
+        <input type="submit" value="OK">
+    </form>
+    
+    <p style="text-align: left;">&nbsp;</p>
+    
+    <form action="apply_visu" >
+    <label for="model-select"> Generate a plot :</label>
+        <select name="model" id="model-select" onchange='if(this.value != 0) { this.form.submit(); }'>
+            <option value="0">--Please choose a variable--</option>
+            <option value="RandomForestRegressor">RandomForestRegressor</option>
+            <option value="KNeighborsRegressor">KNeighborsRegressor</option>
+
+        </select>
+    </form>
+    
+    
+    {{plot_html|safe}}
+    
+  </body>
+</html>
